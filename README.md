@@ -34,5 +34,5 @@ heroku login
 heroku create ipl-ai-project
 git add -A
 git commit -m "push to heroku"
-git push heroku master
+git push heroku main
 ```
