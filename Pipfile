@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-streamlit = "*"
-sklearn = "*"
-pandas = "*"
+streamlit = "1.4.4"
+sklearn = "1.1.3"
+pandas = "1.15.1"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.9"
