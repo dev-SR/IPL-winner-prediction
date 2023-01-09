@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
-
+import sklearn
 # Declaring the teams
 
 teams = ['Sunrisers Hyderabad',
@@ -57,11 +57,11 @@ with col5:
 
 if st.button('Predict Probability'):
 
-    runs_left = target-score
-    balls_left = 120-(overs*6)
-    wickets = 10-wickets
-    currentrunrate = score/overs
-    requiredrunrate = (runs_left*6)/balls_left
+    runs_left = target - score
+    balls_left = 120 - (overs * 6)
+    wickets = 10 - wickets
+    currentrunrate = score / overs
+    requiredrunrate = (runs_left * 6) / balls_left
 
     input_df = pd.DataFrame({'batting_team': [battingteam], 'bowling_team': [bowlingteam], 'city': [city], 'runs_left': [runs_left], 'balls_left': [
                             balls_left], 'wickets': [wickets], 'total_runs_x': [target], 'cur_run_rate': [currentrunrate], 'req_run_rate': [requiredrunrate]})
@@ -70,6 +70,6 @@ if st.button('Predict Probability'):
     lossprob = result[0][0]
     winprob = result[0][1]
 
-    st.header(battingteam+"- "+str(round(winprob*100))+"%")
+    st.header(battingteam + "- " + str(round(winprob * 100)) + "%")
 
-    st.header(bowlingteam+"- "+str(round(lossprob*100))+"%")
+    st.header(bowlingteam + "- " + str(round(lossprob * 100)) + "%")
