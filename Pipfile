@@ -5,11 +5,8 @@ name = "pypi"
 
 [packages]
 streamlit = "1.4.4"
-scikit-learn = "==1.0.2"
-pandas = "*"
-
-[dev-packages]
-autopep8 = "*"
+scikit-learn = "1.0.2"
+pandas = "1.4.3"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10.6"
