@@ -2,7 +2,20 @@ import streamlit as st
 import pandas as pd
 import pickle
 import sklearn
-# Declaring the teams
+# Hide dev element
+hide_streamlit_style = """
+<style>
+#MainMenu {
+  visibility: hidden;
+}
+footer {
+    visibility: hidden
+}
+
+<style/>
+"""
+
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 teams = ['Sunrisers Hyderabad',
          'Mumbai Indians',
@@ -56,20 +69,25 @@ with col5:
 
 
 if st.button('Predict Probability'):
+    try:
+        runs_left = target - score
+        balls_left = 120 - (overs * 6)
+        wickets = 10 - wickets
+        currentrunrate = score / overs
+        requiredrunrate = (runs_left * 6) / balls_left
 
-    runs_left = target - score
-    balls_left = 120 - (overs * 6)
-    wickets = 10 - wickets
-    currentrunrate = score / overs
-    requiredrunrate = (runs_left * 6) / balls_left
+        if runs_left <= 0:
+            st.header(battingteam + "- " + str(round(1 * 100)) + "%")
+            st.header(bowlingteam + "- " + str(round(0 * 100)) + "%")
+        else:
+            input_df = pd.DataFrame({'batting_team': [battingteam], 'bowling_team': [bowlingteam], 'city': [city], 'runs_left': [runs_left], 'balls_left': [
+                                    balls_left], 'wickets': [wickets], 'total_runs_x': [target], 'cur_run_rate': [currentrunrate], 'req_run_rate': [requiredrunrate]})
 
-    input_df = pd.DataFrame({'batting_team': [battingteam], 'bowling_team': [bowlingteam], 'city': [city], 'runs_left': [runs_left], 'balls_left': [
-                            balls_left], 'wickets': [wickets], 'total_runs_x': [target], 'cur_run_rate': [currentrunrate], 'req_run_rate': [requiredrunrate]})
+            result = pipe.predict_proba(input_df)
+            lossprob = result[0][0]
+            winprob = result[0][1]
+            st.header(battingteam + "- " + str(round(winprob * 100)) + "%")
+            st.header(bowlingteam + "- " + str(round(lossprob * 100)) + "%")
 
-    result = pipe.predict_proba(input_df)
-    lossprob = result[0][0]
-    winprob = result[0][1]
-
-    st.header(battingteam + "- " + str(round(winprob * 100)) + "%")
-
-    st.header(bowlingteam + "- " + str(round(lossprob * 100)) + "%")
+    except Exception as e:
+        st.warning('Error, please check if all inputs are valid', icon="⚠️")
