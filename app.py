@@ -11,8 +11,14 @@ hide_streamlit_style = """
 footer {
     visibility: hidden
 }
-button[data-testid$='manage-app-button']{
+
+div[data-testid='stToolbar']{
     visibility: hidden
+    display:none
+}
+button[data-testid='manage-app-button']{
+    visibility: hidden
+    display:none
 }
 <style/>
 """
