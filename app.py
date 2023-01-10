@@ -23,7 +23,7 @@ cities = ['Hyderabad', 'Bangalore', 'Mumbai', 'Indore', 'Kolkata', 'Delhi',
           'Sharjah', 'Mohali', 'Bengaluru']
 
 
-pipe = pickle.load(open('pipe.pkl', 'rb'))
+pipe = pickle.load(open('model.pkl', 'rb'))
 st.title('IPL Win Predictor')
 
 
@@ -41,18 +41,18 @@ city = st.selectbox(
     'Select the city where the match is being played', sorted(cities))
 
 
-target = st.number_input('Target')
+target = st.number_input('Target', step=1, min_value=0)
 
 col3, col4, col5 = st.columns(3)
 
 with col3:
-    score = st.number_input('Score')
+    score = st.number_input('Score', step=1, min_value=0)
 
 with col4:
-    overs = st.number_input('Overs Completed')
+    overs = st.number_input('Overs Completed', step=1, min_value=0)
 
 with col5:
-    wickets = st.number_input('Wickets Fallen')
+    wickets = st.number_input('Wickets Fallen', step=1, min_value=0)
 
 
 if st.button('Predict Probability'):
