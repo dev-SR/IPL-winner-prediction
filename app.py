@@ -11,7 +11,9 @@ hide_streamlit_style = """
 footer {
     visibility: hidden
 }
-
+button[data-testid$='manage-app-button']{
+    visibility: hidden
+}
 <style/>
 """
 
