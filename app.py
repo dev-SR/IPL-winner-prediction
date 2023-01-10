@@ -12,13 +12,11 @@ footer {
     visibility: hidden
 }
 
-div[data-testid='stToolbar']{
+div[data-testid$='stToolbar']{
     visibility: hidden
-    display:none
 }
-button[data-testid='manage-app-button']{
+button[data-testid$='manage-app-button']{
     visibility: hidden
-    display:none
 }
 <style/>
 """
